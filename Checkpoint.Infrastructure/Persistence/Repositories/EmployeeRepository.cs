@@ -1,5 +1,6 @@
 using Checkpoint.Core.Entities;
 using Checkpoint.Core.Interfaces.Repositories;
+using Checkpoint.Core.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Checkpoint.Infrastructure.Persistence.Repositories
@@ -28,6 +29,26 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
         public async Task<bool> AlreadyAnEmployeeWithTheSameUsername(string username)
         {
             return await _dbContext.Employees.AnyAsync(employee => employee.User == username);
+        }
+
+        public async Task<EmployeeClaimsViewModel?> GetEmployeeClaimsByUsernameAndPassword(
+            string username,
+            string encryptedPassword
+        )
+        {
+            return await _dbContext.Employees
+                .Where(e => e.User == username && e.Password == encryptedPassword)
+                .Select(
+                    e =>
+                        new EmployeeClaimsViewModel(
+                            e.Id,
+                            e.Email,
+                            e.Name,
+                            e.User,
+                            e.VerifiedEmail ?? false
+                        )
+                )
+                .SingleOrDefaultAsync();
         }
     }
 }

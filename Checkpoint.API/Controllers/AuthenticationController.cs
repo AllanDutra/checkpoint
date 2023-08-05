@@ -1,3 +1,4 @@
+using Checkpoint.Application.Commands.AuthenticateEmployee;
 using Checkpoint.Application.Commands.RegisterEmployee;
 using Checkpoint.Core.Interfaces.Notifications;
 using Checkpoint.Core.Models.ViewModels;
@@ -33,6 +34,22 @@ namespace Checkpoint.API.Controllers
                     )
                 )
             );
+        }
+
+        /// <summary>
+        /// Generate a jwt token for authenticate employee
+        /// </summary>
+        /// <param name="command"></param>
+        [HttpPost("authenticate-employee")]
+        [ProducesResponseType(typeof(EmployeeAuthenticationViewModel), 200)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 404)]
+        public async Task<IActionResult> AuthenticateEmployeeAsync(
+            [FromBody] AuthenticateEmployeeCommand command
+        )
+        {
+            var employeeAuthentication = await _mediator.Send(command);
+
+            return PersonalizedResponse(Ok(employeeAuthentication));
         }
     }
 }
