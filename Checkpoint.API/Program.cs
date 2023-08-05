@@ -1,11 +1,26 @@
+using Checkpoint.API.Extensions;
+using Checkpoint.Infrastructure;
+using Checkpoint.Application;
+using Checkpoint.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddValidations();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerExtensions();
+
+builder.Services.AddApplication();
+
+builder.Services.AddDomain();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddNotifications();
 
 var app = builder.Build();
 
@@ -13,7 +28,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.RoutePrefix = string.Empty;
+        c.SwaggerEndpoint("./swagger/v1/swagger.json", "Checkpoint.API");
+    });
 }
 
 app.UseHttpsRedirection();
