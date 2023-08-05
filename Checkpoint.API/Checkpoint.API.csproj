@@ -24,6 +24,7 @@
     <ProjectReference Include="..\Checkpoint.Core\Checkpoint.Core.csproj" />
     <ProjectReference Include="..\Checkpoint.Application\Checkpoint.Application.csproj" />
     <ProjectReference Include="..\Checkpoint.Infrastructure\Checkpoint.Infrastructure.csproj" />
+    <ProjectReference Include="..\Checkpoint.Shared\Checkpoint.Shared.csproj" />
   </ItemGroup>
 
 </Project>

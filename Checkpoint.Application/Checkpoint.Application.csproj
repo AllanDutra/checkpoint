@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Checkpoint.Core\Checkpoint.Core.csproj" />
+    <ProjectReference Include="..\Checkpoint.Shared\Checkpoint.Shared.csproj" />
   </ItemGroup>
 
 </Project>
