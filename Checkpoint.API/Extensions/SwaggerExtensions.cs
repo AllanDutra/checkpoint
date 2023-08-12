@@ -41,6 +41,35 @@ namespace Checkpoint.API.Extensions
                     .ToArray();
 
                 Array.ForEach(xmlDocs, (d) => c.IncludeXmlComments(d));
+
+                c.AddSecurityDefinition(
+                    "Bearer",
+                    new OpenApiSecurityScheme
+                    {
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "Bearer",
+                        In = ParameterLocation.Header,
+                        Description = "JWT Authorization Header using Bearer method."
+                    }
+                );
+
+                c.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
+                    }
+                );
             });
 
             return services;

@@ -1,8 +1,10 @@
 using Checkpoint.Application.Commands.AuthenticateEmployee;
 using Checkpoint.Application.Commands.RegisterEmployee;
+using Checkpoint.Core.DomainServices.Auth;
 using Checkpoint.Core.Interfaces.Notifications;
 using Checkpoint.Core.Models.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Checkpoint.API.Controllers
@@ -11,13 +13,18 @@ namespace Checkpoint.API.Controllers
     [Route("api/authentication")]
     public class AuthenticationController : MainController
     {
-        public AuthenticationController(IMediator mediator, INotifier notifier)
-            : base(mediator, notifier) { }
+        public AuthenticationController(
+            IMediator mediator,
+            INotifier notifier,
+            IAuthDomainService authDomainService
+        )
+            : base(mediator, notifier, authDomainService) { }
 
         /// <summary>
         /// Register a new employee in database
         /// </summary>
         /// <param name="command"></param>
+        [AllowAnonymous]
         [HttpPost("register-employee")]
         [ProducesResponseType(typeof(DefaultResponseViewModel), 200)]
         [ProducesResponseType(typeof(DefaultResponseViewModel), 400)]
@@ -40,6 +47,7 @@ namespace Checkpoint.API.Controllers
         /// Generate a jwt token for authenticate employee
         /// </summary>
         /// <param name="command"></param>
+        [AllowAnonymous]
         [HttpPost("authenticate-employee")]
         [ProducesResponseType(typeof(EmployeeAuthenticationViewModel), 200)]
         [ProducesResponseType(typeof(DefaultResponseViewModel), 404)]
