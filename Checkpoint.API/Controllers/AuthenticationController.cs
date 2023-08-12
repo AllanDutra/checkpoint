@@ -59,5 +59,19 @@ namespace Checkpoint.API.Controllers
 
             return PersonalizedResponse(Ok(employeeAuthentication));
         }
+
+        /// <summary>
+        /// Obtains the data of the authenticated employee, if applicable
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("get-authenticated-employee-data")]
+        [ProducesResponseType(typeof(EmployeeClaimsViewModel), 200)]
+        [ProducesResponseType(typeof(void), 401)]
+        public IActionResult GetAuthenticatedEmployeeData()
+        {
+            var employeeClaims = _authDomainService.ReadUserClaims(User.Claims.ToList());
+
+            return PersonalizedResponse(Ok(employeeClaims));
+        }
     }
 }
