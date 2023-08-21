@@ -6,6 +6,6 @@ namespace Checkpoint.Core.DomainServices.Auth
     public interface IAuthDomainService
     {
         string GenerateJwtToken(EmployeeClaimsViewModel employeeClaims);
-        EmployeeClaimsViewModel ReadUserClaims(List<Claim> userClaims);
+        EmployeeClaimsViewModel ReadUserClaims(IEnumerable<Claim> userClaims);
     }
 }

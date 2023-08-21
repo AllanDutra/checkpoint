@@ -49,7 +49,7 @@ namespace Checkpoint.Core.DomainServices.Auth
             return tokenHandler.WriteToken(token);
         }
 
-        public EmployeeClaimsViewModel ReadUserClaims(List<Claim> userClaims)
+        public EmployeeClaimsViewModel ReadUserClaims(IEnumerable<Claim> userClaims)
         {
             return new EmployeeClaimsViewModel(
                 int.Parse(userClaims.First(c => c.Type == "Id").Value),

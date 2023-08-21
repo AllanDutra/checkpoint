@@ -69,7 +69,7 @@ namespace Checkpoint.API.Controllers
         [ProducesResponseType(typeof(void), 401)]
         public IActionResult GetAuthenticatedEmployeeData()
         {
-            var employeeClaims = _authDomainService.ReadUserClaims(User.Claims.ToList());
+            var employeeClaims = _authDomainService.ReadUserClaims(User.Claims);
 
             return PersonalizedResponse(Ok(employeeClaims));
         }
