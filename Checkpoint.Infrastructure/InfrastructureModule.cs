@@ -27,6 +27,8 @@ namespace Checkpoint.Infrastructure
         {
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
+            services.AddScoped<IPointLogRepository, PointLogRepository>();
+
             return services;
         }
     }
