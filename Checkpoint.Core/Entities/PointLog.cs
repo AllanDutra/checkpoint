@@ -1,10 +1,15 @@
-﻿using Checkpoint.Core.Enums;
-
-namespace Checkpoint.Core.Entities;
+﻿namespace Checkpoint.Core.Entities;
 
 public class PointLog
 {
-    public PointLog(int id, int? empolyeeId, DateTime date, PointLogTypeEnum? type)
+    public PointLog(int? empolyeeId, DateTime date, char? type)
+    {
+        EmpolyeeId = empolyeeId;
+        Date = date;
+        Type = type;
+    }
+
+    public PointLog(int id, int? empolyeeId, DateTime date, char? type)
     {
         Id = id;
         EmpolyeeId = empolyeeId;
@@ -12,13 +17,15 @@ public class PointLog
         Type = type;
     }
 
+    public bool NewCheckpointTypeIsValid(char? lastCheckpointType) => Type != lastCheckpointType;
+
     public int Id { get; }
 
     public int? EmpolyeeId { get; }
 
     public DateTime Date { get; }
 
-    public PointLogTypeEnum? Type { get; }
+    public char? Type { get; }
 
-    public virtual Employee? Empolyee { get; }
+    public virtual Employee Empolyee { get; }
 }
