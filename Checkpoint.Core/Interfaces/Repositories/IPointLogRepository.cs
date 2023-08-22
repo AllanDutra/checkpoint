@@ -2,9 +2,10 @@ using Checkpoint.Core.Entities;
 
 namespace Checkpoint.Core.Interfaces.Repositories
 {
+#nullable enable
     public interface IPointLogRepository
     {
         Task RegisterAsync(PointLog pointLog);
-        Task<char?> GetLastCheckpoint(int employeeId);
+        Task<PointLog?> GetLastCheckpoint(int employeeId);
     }
 }

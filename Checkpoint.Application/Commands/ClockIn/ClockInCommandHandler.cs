@@ -22,11 +22,9 @@ namespace Checkpoint.Application.Commands.ClockIn
         {
             var pointLog = new PointLog(request.EmployeeId, DateTime.Now, request.Type);
 
-            var lastCheckpointType = await _pointLogRepository.GetLastCheckpoint(
-                request.EmployeeId
-            );
+            var lastCheckpoint = await _pointLogRepository.GetLastCheckpoint(request.EmployeeId);
 
-            if (!pointLog.NewCheckpointTypeIsValid(lastCheckpointType))
+            if (!pointLog.NewCheckpointTypeIsValid(lastCheckpoint?.Type))
             {
                 _notifier.Handle(
                     new NotificationModel(

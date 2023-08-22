@@ -20,17 +20,14 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
             await _checkpointDbContext.SaveChangesAsync();
         }
 
-        public async Task<char?> GetLastCheckpoint(int employeeId)
+        public async Task<PointLog?> GetLastCheckpoint(int employeeId)
         {
             var lastCheckpoint = await _checkpointDbContext.PointLogs
                 .Where(l => l.EmpolyeeId == employeeId)
                 .OrderByDescending(l => l.Date)
                 .FirstOrDefaultAsync();
 
-            if (lastCheckpoint != null)
-                return lastCheckpoint.Type;
-
-            return null;
+            return lastCheckpoint;
         }
     }
 }
