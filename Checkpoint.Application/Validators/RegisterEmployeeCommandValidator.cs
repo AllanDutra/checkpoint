@@ -1,5 +1,3 @@
-using System.Net.Mail;
-using System.Text.RegularExpressions;
 using Checkpoint.Application.Commands.RegisterEmployee;
 using Checkpoint.Shared.Utils;
 using FluentValidation;
