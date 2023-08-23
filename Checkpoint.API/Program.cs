@@ -24,6 +24,8 @@ builder.Services.AddNotifications();
 
 builder.Services.AddAuthenticationScheme(builder.Configuration);
 
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
