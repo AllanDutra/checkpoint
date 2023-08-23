@@ -1,5 +1,6 @@
 using Checkpoint.Core.DomainServices.Auth;
 using Checkpoint.Core.DomainServices.Crypto;
+using Checkpoint.Core.DomainServices.Mail;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Checkpoint.Core
@@ -11,6 +12,8 @@ namespace Checkpoint.Core
             services.AddScoped<ICryptoDomainService, CryptoDomainService>();
 
             services.AddScoped<IAuthDomainService, AuthDomainService>();
+
+            services.AddScoped<IMailDomainService, MailDomainService>();
 
             return services;
         }
