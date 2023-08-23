@@ -1,4 +1,4 @@
-using Checkpoint.Application.Queries;
+using Checkpoint.Application.Queries.GetEmployeeInfo;
 using Checkpoint.Core.DomainServices.Auth;
 using Checkpoint.Core.Interfaces.Notifications;
 using Checkpoint.Core.Models.ViewModels;

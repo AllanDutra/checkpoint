@@ -1,7 +1,7 @@
 using Checkpoint.Core.Models.ViewModels;
 using MediatR;
 
-namespace Checkpoint.Application.Queries
+namespace Checkpoint.Application.Queries.GetEmployeeInfo
 {
     public class GetEmployeeInfoQuery : IRequest<EmployeeInfoViewModel>
     {

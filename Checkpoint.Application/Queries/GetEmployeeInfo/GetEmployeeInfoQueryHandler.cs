@@ -1,8 +1,9 @@
 using Checkpoint.Core.Interfaces.Repositories;
 using Checkpoint.Core.Models.ViewModels;
+using Checkpoint.Shared.Utils;
 using MediatR;
 
-namespace Checkpoint.Application.Queries
+namespace Checkpoint.Application.Queries.GetEmployeeInfo
 {
     public class GetEmployeeInfoQueryHandler
         : IRequestHandler<GetEmployeeInfoQuery, EmployeeInfoViewModel>
@@ -21,7 +22,7 @@ namespace Checkpoint.Application.Queries
         {
             var lastCheckpoint = await _pointLogRepository.GetLastCheckpoint(request.Id);
 
-            var status = lastCheckpoint?.GetEmployeeStatus() ?? "Unavailable";
+            var status = Formatting.GetEmployeeStatus((lastCheckpoint?.Type, lastCheckpoint?.Date));
 
             return new EmployeeInfoViewModel(request.Id, request.Name, status);
         }
