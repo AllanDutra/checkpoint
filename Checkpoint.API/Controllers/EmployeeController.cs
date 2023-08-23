@@ -1,6 +1,8 @@
 using Checkpoint.Application.Queries.GetEmployeeInfo;
+using Checkpoint.Application.Queries.GetInfoFromOtherEmployees;
 using Checkpoint.Core.DomainServices.Auth;
 using Checkpoint.Core.Interfaces.Notifications;
+using Checkpoint.Core.Models.InputModels;
 using Checkpoint.Core.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,31 @@ namespace Checkpoint.API.Controllers
             var employeeInfo = await _mediator.Send(query);
 
             return PersonalizedResponse(Ok(employeeInfo));
+        }
+
+        /// <summary>
+        /// Get id, name and status from the others employees
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(List<EmployeeInfoViewModel>), 200)]
+        [ProducesResponseType(typeof(void), 401)]
+        [HttpGet("get-info-from-other-employees")]
+        public async Task<IActionResult> GetInfoFromOtherEmployeesAsync(
+            [FromQuery] GetInfoFromOtherEmployeesInputModel inputModel
+        )
+        {
+            var employeeClaims = _authDomainService.ReadUserClaims(User.Claims);
+
+            var query = new GetInfoFromOtherEmployeesQuery(
+                employeeClaims.Id,
+                inputModel.Search,
+                inputModel.Filter,
+                inputModel.Ordination
+            );
+
+            var infoFromOtherEmployees = await _mediator.Send(query);
+
+            return PersonalizedResponse(Ok(infoFromOtherEmployees));
         }
     }
 }
