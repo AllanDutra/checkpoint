@@ -1,3 +1,5 @@
+using Checkpoint.Core.Enums;
+
 namespace Checkpoint.Shared.Utils
 {
     public static class Formatting
@@ -11,6 +13,19 @@ namespace Checkpoint.Shared.Utils
                 return "Yesterday";
 
             return $"on {date:MM/dd/yyyy}";
+        }
+
+        public static string GetEmployeeStatus((char? Type, DateTime? Date) lastPointLog)
+        {
+            if (lastPointLog.Type == null || lastPointLog.Date == null)
+                return "Unavailable";
+
+            if ((PointLogTypeEnum)lastPointLog.Type == PointLogTypeEnum.Arrival)
+                return "Available";
+
+            var date = (DateTime)lastPointLog.Date;
+
+            return $"Last seen {GetDateInFull(date.Date)} at {date.Hour}:{date.Minute} {date:tt}".TrimEnd();
         }
     }
 }

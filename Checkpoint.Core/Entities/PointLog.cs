@@ -1,7 +1,4 @@
-﻿using Checkpoint.Core.Enums;
-using Checkpoint.Shared.Utils;
-
-namespace Checkpoint.Core.Entities;
+﻿namespace Checkpoint.Core.Entities;
 
 public class PointLog
 {
@@ -21,14 +18,6 @@ public class PointLog
     }
 
     public bool NewCheckpointTypeIsValid(char? lastCheckpointType) => Type != lastCheckpointType;
-
-    public string GetEmployeeStatus()
-    {
-        if (Type == (char)PointLogTypeEnum.Arrival)
-            return "Available";
-
-        return $"Last seen {Formatting.GetDateInFull(Date.Date)} at {Date.Hour}:{Date.Minute} {Date:tt}";
-    }
 
     public int Id { get; }
 
