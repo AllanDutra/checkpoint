@@ -36,7 +36,7 @@ namespace Checkpoint.Application.Commands.AuthenticateEmployee
         {
             var encryptedPassword = _cryptoDomainService.EncryptToSha256(request.Password);
 
-            var employeeClaims = await _employeeRepository.GetEmployeeClaimsByUsernameAndPassword(
+            var employeeClaims = await _employeeRepository.GetEmployeeClaimsByUsernameAndPasswordAsync(
                 request.User,
                 encryptedPassword
             );

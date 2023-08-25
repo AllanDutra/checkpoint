@@ -39,7 +39,7 @@ namespace Checkpoint.Application.Commands.GenerateEmailConfirmationCode
         )
         {
             var employeeEmailAlreadyVerified =
-                await _employeeRepository.EmployeeEmailAlreadyVerified(request.EmployeeEmail);
+                await _employeeRepository.EmployeeEmailAlreadyVerifiedAsync(request.EmployeeEmail);
 
             if (employeeEmailAlreadyVerified)
             {
@@ -55,7 +55,7 @@ namespace Checkpoint.Application.Commands.GenerateEmailConfirmationCode
 
             var confirmationCode = _authDomainService.GenerateEmailConfirmationCode();
 
-            var emailVerification = await _emailVerificationRepository.GetByEmployeeEmail(
+            var emailVerification = await _emailVerificationRepository.GetByEmployeeEmailAsync(
                 request.EmployeeEmail
             );
 

@@ -6,6 +6,6 @@ namespace Checkpoint.Core.Interfaces.Repositories
     public interface IPointLogRepository
     {
         Task RegisterAsync(PointLog pointLog);
-        Task<PointLog?> GetLastCheckpoint(int employeeId);
+        Task<PointLog?> GetLastCheckpointAsync(int employeeId);
     }
 }

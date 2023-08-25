@@ -23,17 +23,17 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> AlreadyAnEmployeeWithTheSameEmail(string email)
+        public async Task<bool> AlreadyAnEmployeeWithTheSameEmailAsync(string email)
         {
             return await _dbContext.Employees.AnyAsync(employee => employee.Email == email);
         }
 
-        public async Task<bool> AlreadyAnEmployeeWithTheSameUsername(string username)
+        public async Task<bool> AlreadyAnEmployeeWithTheSameUsernameAsync(string username)
         {
             return await _dbContext.Employees.AnyAsync(employee => employee.User == username);
         }
 
-        public async Task<EmployeeClaimsViewModel?> GetEmployeeClaimsByUsernameAndPassword(
+        public async Task<EmployeeClaimsViewModel?> GetEmployeeClaimsByUsernameAndPasswordAsync(
             string username,
             string encryptedPassword
         )
@@ -53,7 +53,7 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<List<OtherEmployeesInfoViewModel>> GetInfoFromOtherEmployees(
+        public async Task<List<OtherEmployeesInfoViewModel>> GetInfoFromOtherEmployeesAsync(
             int idEmployeeWhoIsQuerying,
             string? search,
             string? filter,

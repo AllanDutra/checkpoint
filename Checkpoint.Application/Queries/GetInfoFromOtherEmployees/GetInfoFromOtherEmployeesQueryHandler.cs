@@ -20,7 +20,7 @@ namespace Checkpoint.Application.Queries.GetInfoFromOtherEmployees
             CancellationToken cancellationToken
         )
         {
-            var otherEmployeesInfo = await _employeeRepository.GetInfoFromOtherEmployees(
+            var otherEmployeesInfo = await _employeeRepository.GetInfoFromOtherEmployeesAsync(
                 request.IdEmployeeWhoIsQuerying,
                 request.Search,
                 request.Filter,

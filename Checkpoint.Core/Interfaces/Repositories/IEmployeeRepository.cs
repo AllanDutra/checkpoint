@@ -7,18 +7,18 @@ namespace Checkpoint.Core.Interfaces.Repositories
     public interface IEmployeeRepository
     {
         Task RegisterAsync(Employee employee);
-        Task<bool> AlreadyAnEmployeeWithTheSameEmail(string email);
-        Task<bool> AlreadyAnEmployeeWithTheSameUsername(string username);
-        Task<EmployeeClaimsViewModel?> GetEmployeeClaimsByUsernameAndPassword(
+        Task<bool> AlreadyAnEmployeeWithTheSameEmailAsync(string email);
+        Task<bool> AlreadyAnEmployeeWithTheSameUsernameAsync(string username);
+        Task<EmployeeClaimsViewModel?> GetEmployeeClaimsByUsernameAndPasswordAsync(
             string username,
             string encryptedPassword
         );
-        Task<List<OtherEmployeesInfoViewModel>> GetInfoFromOtherEmployees(
+        Task<List<OtherEmployeesInfoViewModel>> GetInfoFromOtherEmployeesAsync(
             int idEmployeeWhoIsQuerying,
             string? search,
             string? filter,
             string? ordination
         );
-        Task<bool> EmployeeEmailAlreadyVerified(string email);
+        Task<bool> EmployeeEmailAlreadyVerifiedAsync(string email);
     }
 }

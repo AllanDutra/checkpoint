@@ -5,7 +5,7 @@ namespace Checkpoint.Core.Interfaces.Repositories
 #nullable enable
     public interface IEmailVerificationRepository
     {
-        Task<EmailVerification?> GetByEmployeeEmail(string employeeEmail);
+        Task<EmailVerification?> GetByEmployeeEmailAsync(string employeeEmail);
 
         Task RegisterAsync(EmailVerification emailVerification);
 

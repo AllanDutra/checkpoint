@@ -39,7 +39,7 @@ namespace Checkpoint.Application.Commands.RegisterEmployee
                 _cryptoDomainService.EncryptToSha256(request.Password)
             );
 
-            if (await _employeeRepository.AlreadyAnEmployeeWithTheSameEmail(request.Email))
+            if (await _employeeRepository.AlreadyAnEmployeeWithTheSameEmailAsync(request.Email))
             {
                 _notifier.Handle(
                     new NotificationModel(
@@ -51,7 +51,7 @@ namespace Checkpoint.Application.Commands.RegisterEmployee
                 return Unit.Value;
             }
 
-            if (await _employeeRepository.AlreadyAnEmployeeWithTheSameUsername(request.User))
+            if (await _employeeRepository.AlreadyAnEmployeeWithTheSameUsernameAsync(request.User))
             {
                 _notifier.Handle(
                     new NotificationModel(

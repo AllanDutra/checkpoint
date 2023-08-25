@@ -13,7 +13,7 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<EmailVerification?> GetByEmployeeEmail(string employeeEmail)
+        public async Task<EmailVerification?> GetByEmployeeEmailAsync(string employeeEmail)
         {
             return await _dbContext.EmailVerifications.FirstOrDefaultAsync(
                 ev => ev.EmployeeEmail == employeeEmail

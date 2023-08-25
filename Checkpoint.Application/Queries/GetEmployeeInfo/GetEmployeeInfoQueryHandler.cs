@@ -20,7 +20,7 @@ namespace Checkpoint.Application.Queries.GetEmployeeInfo
             CancellationToken cancellationToken
         )
         {
-            var lastCheckpoint = await _pointLogRepository.GetLastCheckpoint(request.Id);
+            var lastCheckpoint = await _pointLogRepository.GetLastCheckpointAsync(request.Id);
 
             var status = Formatting.GetEmployeeStatus((lastCheckpoint?.Type, lastCheckpoint?.Date));
 
