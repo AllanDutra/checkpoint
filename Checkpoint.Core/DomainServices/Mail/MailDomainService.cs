@@ -50,7 +50,7 @@ namespace Checkpoint.Core.DomainServices.Mail
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587)
                 {
                     EnableSsl = true,
-                    Timeout = 60 * 60,
+                    Timeout = 10000, // ? 10 seconds
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential(userName, password)
                 };
