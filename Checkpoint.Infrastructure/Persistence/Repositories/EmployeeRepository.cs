@@ -123,5 +123,10 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
 
             return data?.VerifiedEmail ?? false;
         }
+
+        public async Task<Employee?> GetByEmailAsync(string email) =>
+            await _dbContext.Employees.FirstOrDefaultAsync(e => e.Email == email);
+
+        public async Task SaveChangesAsync() => await _dbContext.SaveChangesAsync();
     }
 }

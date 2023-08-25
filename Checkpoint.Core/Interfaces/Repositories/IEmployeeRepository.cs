@@ -20,5 +20,9 @@ namespace Checkpoint.Core.Interfaces.Repositories
             string? ordination
         );
         Task<bool> EmployeeEmailAlreadyVerifiedAsync(string email);
+
+        Task<Employee?> GetByEmailAsync(string email);
+
+        Task SaveChangesAsync();
     }
 }
