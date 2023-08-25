@@ -19,5 +19,6 @@ namespace Checkpoint.Core.Interfaces.Repositories
             string? filter,
             string? ordination
         );
+        Task<bool> EmployeeEmailAlreadyVerified(string email);
     }
 }
