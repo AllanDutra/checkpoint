@@ -1,3 +1,4 @@
+using Checkpoint.Application.Commands.GenerateEmailConfirmationCode;
 using Checkpoint.Application.Queries.GetEmployeeInfo;
 using Checkpoint.Application.Queries.GetInfoFromOtherEmployees;
 using Checkpoint.Core.DomainServices.Auth;
@@ -61,6 +62,25 @@ namespace Checkpoint.API.Controllers
             var infoFromOtherEmployees = await _mediator.Send(query);
 
             return PersonalizedResponse(Ok(infoFromOtherEmployees));
+        }
+
+        /// <summary>
+        /// Generates a new confirmation code and sends it to the authenticated employee's email
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 200)]
+        [ProducesResponseType(typeof(void), 401)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 424)]
+        [HttpPut("generate-email-confirmation-code")]
+        public async Task<IActionResult> GenerateEmailConfirmationCodeAsync()
+        {
+            var employeeClaims = _authDomainService.ReadUserClaims(User.Claims);
+
+            var command = new GenerateEmailConfirmationCodeCommand(employeeClaims.Email);
+
+            await _mediator.Send(command);
+
+            return PersonalizedResponse(Ok());
         }
     }
 }
