@@ -15,6 +15,10 @@ namespace Checkpoint.Infrastructure.Persistence.Configurations
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EmployeeEmail).HasMaxLength(255).HasColumnName("employee_email");
             entity
+                .Property(e => e.GenerationDate)
+                .HasColumnType("datetime")
+                .HasColumnName("generationDate");
+            entity
                 .Property(e => e.VerificationCode)
                 .HasMaxLength(255)
                 .HasColumnName("verificationCode");
