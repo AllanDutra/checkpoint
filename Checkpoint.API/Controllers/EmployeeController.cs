@@ -69,6 +69,7 @@ namespace Checkpoint.API.Controllers
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(DefaultResponseViewModel), 200)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 400)]
         [ProducesResponseType(typeof(void), 401)]
         [ProducesResponseType(typeof(DefaultResponseViewModel), 424)]
         [HttpPut("generate-email-confirmation-code")]
