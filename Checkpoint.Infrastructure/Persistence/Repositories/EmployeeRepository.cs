@@ -114,11 +114,14 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
             ).ToList();
         }
 
-        public async Task<bool> EmployeeEmailAlreadyVerified(string email)
+        public async Task<bool> EmployeeEmailAlreadyVerifiedAsync(string email)
         {
-            return (
-                    await _dbContext.Employees.FirstOrDefaultAsync(e => e.Email == email)
-                )?.VerifiedEmail ?? false;
+            var data = await _dbContext.Employees
+                .Where(e => e.Email == email)
+                .Select(e => new { e.VerifiedEmail })
+                .FirstOrDefaultAsync();
+
+            return data?.VerifiedEmail ?? false;
         }
     }
 }
