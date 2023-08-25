@@ -22,7 +22,7 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
 
         public async Task RegisterAsync(EmailVerification emailVerification)
         {
-            await _dbContext.AddAsync(emailVerification);
+            await _dbContext.EmailVerifications.AddAsync(emailVerification);
 
             await _dbContext.SaveChangesAsync();
         }
