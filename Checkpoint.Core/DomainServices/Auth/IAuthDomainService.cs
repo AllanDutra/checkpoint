@@ -7,5 +7,6 @@ namespace Checkpoint.Core.DomainServices.Auth
     {
         string GenerateJwtToken(EmployeeClaimsViewModel employeeClaims);
         EmployeeClaimsViewModel ReadUserClaims(IEnumerable<Claim> userClaims);
+        string GenerateEmailConfirmationCode();
     }
 }

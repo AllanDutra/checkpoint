@@ -59,5 +59,27 @@ namespace Checkpoint.Core.DomainServices.Auth
                 bool.Parse(userClaims.First(c => c.Type == "VerifiedEmail").Value)
             );
         }
+
+        public string GenerateEmailConfirmationCode()
+        {
+            const int LENGTH = 6; // ? NUMBER OF DIGITS
+
+            var random = new Random();
+
+            var confirmationCode = new StringBuilder();
+
+            for (int i = 0; i < LENGTH; i++)
+            {
+                var randomValue = random.Next(36); // ? Generate a random value between 0 and 35 (26 letters + 10 numbers)
+
+                var character = (char)(
+                    randomValue < 10 ? '0' + randomValue : 'A' + randomValue - 10
+                );
+
+                confirmationCode.Append(character);
+            }
+
+            return confirmationCode.ToString();
+        }
     }
 }
