@@ -1,3 +1,4 @@
+using Checkpoint.Application.Commands.ConfirmEmail;
 using Checkpoint.Application.Commands.GenerateEmailConfirmationCode;
 using Checkpoint.Application.Queries.GetEmployeeInfo;
 using Checkpoint.Application.Queries.GetInfoFromOtherEmployees;
@@ -82,6 +83,32 @@ namespace Checkpoint.API.Controllers
             await _mediator.Send(command);
 
             return PersonalizedResponse(Ok());
+        }
+
+        /// <summary>
+        /// Confirms the email using the confirmation code sent to the employee's email and returns the new jwt with verified email field as true
+        /// </summary>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 400)]
+        [ProducesResponseType(typeof(void), 401)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 404)]
+        [HttpPut("confirm-email")]
+        public async Task<IActionResult> ConfirmEmailAsync(
+            [FromQuery] ConfirmEmailInputModel inputModel
+        )
+        {
+            var employeeClaims = _authDomainService.ReadUserClaims(User.Claims);
+
+            var command = new ConfirmEmailCommand(
+                employeeClaims.Email,
+                inputModel.ConfirmationCode
+            );
+
+            var newJwtToken = await _mediator.Send(command);
+
+            return PersonalizedResponse(Ok(newJwtToken));
         }
     }
 }
