@@ -10,5 +10,7 @@ namespace Checkpoint.Core.Interfaces.Repositories
         Task RegisterAsync(EmailVerification emailVerification);
 
         Task SaveChangesAsync();
+
+        Task DeleteByEmployeeEmailAsync(string employeeEmail);
     }
 }

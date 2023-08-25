@@ -28,5 +28,19 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
         }
 
         public async Task SaveChangesAsync() => await _dbContext.SaveChangesAsync();
+
+        public async Task DeleteByEmployeeEmailAsync(string employeeEmail)
+        {
+            var emailVerification = await _dbContext.EmailVerifications.FirstOrDefaultAsync(
+                ev => ev.EmployeeEmail == employeeEmail
+            );
+
+            if (emailVerification == null)
+                return;
+
+            _dbContext.EmailVerifications.Remove(emailVerification);
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
