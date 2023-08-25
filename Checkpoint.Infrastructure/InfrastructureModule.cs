@@ -29,6 +29,8 @@ namespace Checkpoint.Infrastructure
 
             services.AddScoped<IPointLogRepository, PointLogRepository>();
 
+            services.AddScoped<IEmailVerificationRepository, EmailVerificationRepository>();
+
             return services;
         }
     }
