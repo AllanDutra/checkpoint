@@ -1,3 +1,4 @@
+using Checkpoint.API.Attributes;
 using Checkpoint.Application.Commands.ClockIn;
 using Checkpoint.Core.DomainServices.Auth;
 using Checkpoint.Core.Interfaces.Notifications;
@@ -26,6 +27,8 @@ namespace Checkpoint.API.Controllers
         [ProducesResponseType(typeof(void), 204)]
         [ProducesResponseType(typeof(DefaultResponseViewModel), 400)]
         [ProducesResponseType(typeof(void), 401)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 403)]
+        [RequiresConfirmedEmail]
         [HttpPost("clock-in")]
         public async Task<IActionResult> ClockInAsync([FromQuery] ClockInInputModel inputModel)
         {

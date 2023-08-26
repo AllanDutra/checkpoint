@@ -1,3 +1,4 @@
+using Checkpoint.API.Attributes;
 using Checkpoint.Application.Commands.ConfirmEmail;
 using Checkpoint.Application.Commands.GenerateEmailConfirmationCode;
 using Checkpoint.Application.Queries.GetEmployeeInfo;
@@ -46,6 +47,8 @@ namespace Checkpoint.API.Controllers
         /// <returns></returns>
         [ProducesResponseType(typeof(List<EmployeeInfoViewModel>), 200)]
         [ProducesResponseType(typeof(void), 401)]
+        [ProducesResponseType(typeof(DefaultResponseViewModel), 403)]
+        [RequiresConfirmedEmail]
         [HttpGet("get-info-from-other-employees")]
         public async Task<IActionResult> GetInfoFromOtherEmployeesAsync(
             [FromQuery] GetInfoFromOtherEmployeesInputModel inputModel
