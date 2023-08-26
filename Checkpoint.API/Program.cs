@@ -2,6 +2,7 @@ using Checkpoint.API.Extensions;
 using Checkpoint.Infrastructure;
 using Checkpoint.Application;
 using Checkpoint.Core;
+using Checkpoint.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ builder.Services.AddAuthenticationScheme(builder.Configuration);
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
+builder.Services.AddMiddlewares();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +41,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("./swagger/v1/swagger.json", "Checkpoint.API");
     });
 }
+
+app.UseMiddleware<EmailVerificationMiddleware>();
 
 app.UseHttpsRedirection();
 
