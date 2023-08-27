@@ -11,6 +11,6 @@ namespace Checkpoint.Core.Interfaces.Repositories
 
         Task SaveChangesAsync();
 
-        Task DeleteByEmployeeEmailAsync(string employeeEmail);
+        Task DeleteByEmployeeEmailsAsync(List<string> employeeEmails);
     }
 }

@@ -29,16 +29,16 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
 
         public async Task SaveChangesAsync() => await _dbContext.SaveChangesAsync();
 
-        public async Task DeleteByEmployeeEmailAsync(string employeeEmail)
+        public async Task DeleteByEmployeeEmailsAsync(List<string> employeeEmails)
         {
-            var emailVerification = await _dbContext.EmailVerifications.FirstOrDefaultAsync(
-                ev => ev.EmployeeEmail == employeeEmail
-            );
+            var emailVerifications = await _dbContext.EmailVerifications
+                .Where(ev => employeeEmails.Contains(ev.EmployeeEmail))
+                .ToListAsync();
 
-            if (emailVerification == null)
+            if (emailVerifications == null)
                 return;
 
-            _dbContext.EmailVerifications.Remove(emailVerification);
+            _dbContext.EmailVerifications.RemoveRange(emailVerifications);
 
             await _dbContext.SaveChangesAsync();
         }

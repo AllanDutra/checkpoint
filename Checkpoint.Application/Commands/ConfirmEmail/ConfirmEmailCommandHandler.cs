@@ -79,7 +79,9 @@ namespace Checkpoint.Application.Commands.ConfirmEmail
 
             await _employeeRepository.SaveChangesAsync();
 
-            await _emailVerificationRepository.DeleteByEmployeeEmailAsync(request.EmployeeEmail);
+            await _emailVerificationRepository.DeleteByEmployeeEmailsAsync(
+                new List<string> { request.EmployeeEmail }
+            );
 
             var newJwtToken = _authDomainService.GenerateJwtToken(
                 new EmployeeClaimsViewModel(
