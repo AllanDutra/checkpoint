@@ -24,5 +24,9 @@ namespace Checkpoint.Core.Interfaces.Repositories
         Task<Employee?> GetByEmailAsync(string email);
 
         Task SaveChangesAsync();
+
+        Task<List<string>> GetEmailsWithRegistrationDateOlderThan7DaysAndEmailIsNotVerifiedAsync();
+
+        Task DeleteByEmailsAsync(List<string> emails);
     }
 }

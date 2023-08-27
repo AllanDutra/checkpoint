@@ -4,6 +4,7 @@ using Checkpoint.Core.Interfaces.Repositories;
 using Checkpoint.Core.Models.ViewModels;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Checkpoint.Infrastructure.Persistence.Repositories
 {
@@ -128,5 +129,40 @@ namespace Checkpoint.Infrastructure.Persistence.Repositories
             await _dbContext.Employees.FirstOrDefaultAsync(e => e.Email == email);
 
         public async Task SaveChangesAsync() => await _dbContext.SaveChangesAsync();
+
+        public async Task<
+            List<string>
+        > GetEmailsWithRegistrationDateOlderThan7DaysAndEmailIsNotVerifiedAsync()
+        {
+            var currentDate = DateTime.Now;
+            var targetDate = currentDate.AddDays(-7);
+
+            var emails = await _dbContext.Employees
+                .Where(
+                    e =>
+                        e.VerifiedEmail != true
+                        && (e.RegistrationDate <= targetDate || e.RegistrationDate == null)
+                )
+                .Select(e => e.Email)
+                .ToListAsync();
+
+            return emails;
+        }
+
+        public async Task DeleteByEmailsAsync(List<string> emails)
+        {
+            const string SQL =
+                @"DELETE
+                FROM Employees
+                WHERE email IN @emails";
+
+            await _dbContext.Database
+                .GetDbConnection()
+                .ExecuteAsync(
+                    SQL,
+                    new { emails },
+                    _dbContext.Database.CurrentTransaction?.GetDbTransaction()
+                );
+        }
     }
 }
