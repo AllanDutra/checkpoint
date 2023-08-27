@@ -1,3 +1,4 @@
+using Checkpoint.Core.Interfaces;
 using Checkpoint.Core.Interfaces.Repositories;
 using Checkpoint.Infrastructure.Persistence;
 using Checkpoint.Infrastructure.Persistence.Repositories;
@@ -30,6 +31,8 @@ namespace Checkpoint.Infrastructure
             services.AddScoped<IPointLogRepository, PointLogRepository>();
 
             services.AddScoped<IEmailVerificationRepository, EmailVerificationRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
