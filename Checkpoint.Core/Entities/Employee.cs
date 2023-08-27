@@ -2,21 +2,36 @@
 
 public class Employee
 {
-    public Employee(string email, string name, string user, string password)
+    public Employee(
+        string email,
+        string name,
+        string user,
+        string password,
+        DateTime? registrationDate
+    )
     {
         Email = email;
         Name = name;
         User = user;
         Password = password;
+        RegistrationDate = registrationDate;
     }
 
-    public Employee(int id, string email, string name, string user, string password)
+    public Employee(
+        int id,
+        string email,
+        string name,
+        string user,
+        string password,
+        DateTime? registrationDate
+    )
     {
         Id = id;
         Email = email;
         Name = name;
         User = user;
         Password = password;
+        RegistrationDate = registrationDate;
     }
 
     public int Id { get; }
@@ -30,6 +45,8 @@ public class Employee
     public string Password { get; } = null!;
 
     public bool? VerifiedEmail { get; set; }
+
+    public DateTime? RegistrationDate { get; }
 
     public virtual EmailVerification? EmailVerification { get; }
 

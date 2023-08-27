@@ -36,7 +36,8 @@ namespace Checkpoint.Application.Commands.RegisterEmployee
                 request.Email,
                 request.Name,
                 request.User,
-                _cryptoDomainService.EncryptToSha256(request.Password)
+                _cryptoDomainService.EncryptToSha256(request.Password),
+                DateTime.Now
             );
 
             if (await _employeeRepository.AlreadyAnEmployeeWithTheSameEmailAsync(request.Email))

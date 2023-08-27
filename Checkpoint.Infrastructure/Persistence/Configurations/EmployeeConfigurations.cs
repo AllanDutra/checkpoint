@@ -18,6 +18,10 @@ namespace Checkpoint.Infrastructure.Persistence.Configurations
             entity.Property(e => e.Email).HasMaxLength(255).HasColumnName("email");
             entity.Property(e => e.Name).HasMaxLength(255).HasColumnName("name");
             entity.Property(e => e.Password).HasMaxLength(255).HasColumnName("password");
+            entity
+                .Property(e => e.RegistrationDate)
+                .HasColumnType("datetime")
+                .HasColumnName("registration_date");
             entity.Property(e => e.User).HasMaxLength(255).HasColumnName("user");
             entity.Property(e => e.VerifiedEmail).HasColumnName("verified_email");
         }
