@@ -15,7 +15,7 @@ namespace Checkpoint.API.Extensions
                     {
                         Title = "Checkpoint.API",
                         Version = "v1",
-                        Description = "" // TODO: PUT A DESCRIPTION HERE
+                        Description = "The project developed is a kind of digital point, made for company employees, in which the employee registers his point of arrival or departure and the record is available for other employees to see who is or is not in the company at a given time."
                     }
                 );
 
